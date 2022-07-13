@@ -25,25 +25,17 @@ import {
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 //import {Slider} from 'native-base';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useState} from 'react';
 import ImageCarousel from './android/app/src/Components/Caro';
-import {BsChevronLeft} from 'react-icons/bs';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import LinearGradient from 'react-native-linear-gradient';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const [sliderValue, setSliderValue] = useState(15);
-  const [input, setInput] = useState(sliderValue.toString());
+  const [sliderValue, setSliderValue] = useState(500);
+  const [sliderValue1, setSliderValue1] = useState(500);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -58,7 +50,7 @@ const App = () => {
     <SafeAreaView style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
 
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', top: 10}}>
         <View style={{color: '#000000'}}>
           <EvilIcons name="chevron-left" size={70} />
         </View>
@@ -103,10 +95,12 @@ const App = () => {
           <TextInput
             style={{
               //flex: 1,
-              height: 40,
+              height: 50,
               width: 150,
               borderColor: 'gray',
-              borderWidth: 1,
+              fontSize: 20,
+              //paddingTop: 15,
+              // borderWidth: 1,
             }}
             // underlineColorAndroid="transparent"
             onChangeText={sliderValue =>
@@ -120,21 +114,27 @@ const App = () => {
         </View>
       </View>
 
-      <View>
+      <View style={styles.container}>
         {/* <Text style={styles.bar}>Value of slider is : {sliderValue}</Text> */}
 
         <Slider
-          style={styles.bar1}
+          style={{width: 350}}
           minimumTrackTintColor="#307ecc"
           maximumTrackTintColor="#000000"
-          trackStyle={styles.track}
-          thumbStyle={styles.thumb}
+          // trackStyle={styles.track}
+          // thumbStyle={styles.thumb}
           maximumValue={25000}
           minimumValue={500}
           step={1}
-          value={sliderValue}
-          onValueChange={sliderValue => setSliderValue(sliderValue)}
+          value={sliderValue1}
+          onSlidingComplete={value => setSliderValue1(value)}
+          onValueChange={value => setSliderValue(value)}
         />
+        <View style={styles.textCon}>
+          <Text style={styles.colorGrey}>500</Text>
+          {/* <Text style={styles.colorYellow}>{sliderValue.toString()}</Text> */}
+          <Text style={styles.colorGrey}>25000</Text>
+        </View>
       </View>
 
       {/* <View alignItems="center" w="100%">
@@ -174,7 +174,7 @@ const App = () => {
           <ImageCarousel />
         </ScrollView>
       </View>
-      <View style={{top: 30}}>
+      <View style={{top: 50}}>
         <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
           <Image
             style={styles.level}
@@ -189,7 +189,7 @@ const App = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.btn1}>
+      {/* <View style={styles.btn1}>
         <Text
           onPress={() => alert('Nothing')}
           style={{
@@ -200,17 +200,17 @@ const App = () => {
           }}>
           GET STARTED
         </Text>
-      </View>
+      </View> */}
 
-      {/* <TouchableOpacity onPress={() => alert('Nothing')} style={styles.btn}>
+      <TouchableOpacity onPress={() => alert('Nothing')} style={styles.btn}>
         <LinearGradient
           start={{x: 1, y: 0}}
           end={{x: 0, y: 0}}
           colors={['#105099', '#0F325A']}
           style={styles.btn.linear}>
-          <Text style={styles.btn.btnTxt}> SIGN IN</Text>
+          <Text style={styles.btn.btnTxt}>GET STARTED</Text>
         </LinearGradient>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     // fontSize: 18,
     // textAlign: "center",
 
-    top: 20,
+    top: 35,
   },
   simulte: {
     fontWeight: 'bold',
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
   simultepad: {
     //bottom: 20,
-    top: 30,
+    top: 60,
   },
   bar: {
     textAlign: 'center',
@@ -254,10 +254,10 @@ const styles = StyleSheet.create({
   },
   bar1: {
     textAlign: 'center',
-    //flex: 0.5,
-    top: 60,
+    //flex: 1,
+    top: 100,
     width: 350,
-    height: 12,
+    height: 20,
     maxHeight: 50,
   },
   carousel: {
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   car: {
-    top: 120,
+    top: 140,
     textAlign: 'center',
     flexGrow: 0,
     color: '#000000',
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     //elevation: 8,
     //backgroundColor: '#009688',
 
-    top: 60,
+    top: 100,
     //backgroundColor: 'white',
     backgroundColor: 'black',
     borderWidth: 2,
@@ -293,12 +293,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 60,
     width: '94%',
-    height: 48,
+    height: 55,
     borderRadius: 25,
-
+    top: 10,
     btnTxt: {
       color: 'white',
-      fontSize: 17,
+      fontSize: 20,
       fontWeight: '600',
       opacity: 0.8,
     },
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       width: '100%',
-      height: 48,
+      height: 55,
       alignSelf: 'center',
       borderRadius: 25,
       opacity: 0.95,
@@ -317,14 +317,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderWidth: 0.5,
-    borderColor: '#000',
+    backgroundColor: 'transparent',
+    //borderColor: 'white',
+    borderWidth: 0,
+    overflow: 'hidden',
+    //borderColor: '#000',
     height: 40,
     borderRadius: 5,
     margin: 10,
     ShadowColor: '#f2f2f2',
-    elevation: 10,
+    elevation: 3,
+
+    shadowRadius: 10,
+    shadowOpacity: 1,
   },
   ImageStyle: {
     padding: 10,
@@ -333,7 +338,7 @@ const styles = StyleSheet.create({
     width: 20,
     resizeMode: 'stretch',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
   },
   track: {
     height: 10,
@@ -346,6 +351,24 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(150, 150, 150, 0.6)',
     borderWidth: 14,
     borderRadius: 15,
+  },
+  container: {
+    //flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#000',
+    top: 100,
+  },
+  textCon: {
+    width: 350,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  colorGrey: {
+    color: '#d3d3d3',
+  },
+  colorYellow: {
+    color: 'rgb(252, 228, 149)',
   },
 });
 
