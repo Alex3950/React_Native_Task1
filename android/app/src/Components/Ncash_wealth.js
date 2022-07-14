@@ -39,6 +39,7 @@ const Ncash_wealth = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const [sliderValue1, setSliderValue1] = useState(0);
   const [check, setCheck] = useState(false);
+  const [ren, setRen] = useState(true);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     backgroundColor: '#fff',
@@ -47,15 +48,15 @@ const Ncash_wealth = () => {
     //flex: 1,
     //flexDirection: 'column',
   };
-  const changeAmount = newAmount => {
-    if (isNaN(newAmount)) {
-      setAmount('');
-    } else {
-      //setAmount(Math.max(500, newAmount));
-      setAmount(newAmount);
-    }
-    console.log('changeAmount: ', newAmount);
-  };
+  // const changeAmount = newAmount => {
+  //   if (isNaN(newAmount)) {
+  //     setAmount('');
+  //   } else {
+  //     //setAmount(Math.max(500, newAmount));
+  //     setAmount(newAmount);
+  //   }
+  //   console.log('changeAmount: ', newAmount);
+  // };
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -137,7 +138,10 @@ const Ncash_wealth = () => {
                 : setSliderValue1(parseFloat(value));
               setCheck(false);
             }}
-            value={sliderValue.toString()}
+            //onChange={() => setRen(true)}
+            //value={ren ? sliderValue : sliderValue.toString()}
+            defaultValue={sliderValue.toString()}
+            value={sliderValue}
             keyboardType="numeric"
           />
         </View>
@@ -181,6 +185,7 @@ const Ncash_wealth = () => {
           onSlidingStart={() => {
             Keyboard.dismiss();
             setCheck(true);
+            setRen(false);
           }}
         />
         <View style={styles.textCon}>
