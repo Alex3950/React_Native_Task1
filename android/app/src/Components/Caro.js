@@ -1,3 +1,4 @@
+import {Row} from 'native-base';
 import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
@@ -8,31 +9,10 @@ import {
   ImageBackground,
 } from 'react-native';
 import Carousel from 'react-native-anchor-carousel';
+import {amount} from './Ncash_wealth';
 // import { SimplePaginationDot } from "./component";
 
 const {width: windowWidth} = Dimensions.get('window');
-
-const data = [
-  {
-    uri: 'https://i.imgur.com/GImvG4q.jpg',
-  },
-  {
-    uri: 'https://i.imgur.com/Pz2WYAc.jpg',
-  },
-  {
-    uri: 'https://i.imgur.com/IGRuEAa.jpg',
-  },
-  //   {
-  //     uri: "https://i.imgur.com/fRGHItn.jpg",
-  //     title: "Lorem ipsum dolor",
-  //     content: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
-  //   },
-  //   {
-  //     uri: "https://i.imgur.com/WmenvXr.jpg",
-  //     title: "Lorem ipsum ",
-  //     content: "Neque porro quisquam est qui dolorem ipsum quia dolor ",
-  //   },
-];
 
 const INITIAL_INDEX = 0;
 export default function ImageCarousel(props) {
@@ -56,14 +36,35 @@ export default function ImageCarousel(props) {
           {/* <View style={styles.rightTextContainer}>
             <Text style={styles.rightText}>Lorem</Text>
           </View> */}
+          <View style={styles.lowerContainer}>
+            <Text style={styles.titleText}>{title} Years</Text>
+            <Text style={styles.contentText}>
+              Avg of {title} Years
+              {'\n'}
+              {content}
+            </Text>
+          </View>
         </ImageBackground>
-        {/* <View style={styles.lowerContainer}>
-          <Text style={styles.titleText}>{title}</Text>
-          <Text style={styles.contentText}>{content}</Text>
-        </View> */}
       </TouchableOpacity>
     );
   }
+  const data = [
+    {
+      uri: 'https://images.pexels.com/photos/3377405/pexels-photo-3377405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 3,
+      content: 3 * 12 * props.amount,
+    },
+    {
+      uri: 'https://images.pexels.com/photos/3377405/pexels-photo-3377405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 5,
+      content: 5 * 12 * props.amount,
+    },
+    {
+      uri: 'https://images.pexels.com/photos/3377405/pexels-photo-3377405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 7,
+      content: 7 * 12 * props.amount,
+    },
+  ];
 
   return (
     <>
@@ -104,30 +105,37 @@ const styles = StyleSheet.create({
   imageBackground: {
     flex: 0,
     height: 150,
-    //backgroundColor: "#EBEBEB",
-    //borderWidth: 5,
-    //borderColor: "white",
+    backgroundColor: '#EBEBEB',
+    borderWidth: 5,
+    borderColor: 'white',
   },
-  //   rightTextContainer: {
-  //     marginLeft: "auto",
-  //     marginRight: -2,
-  //     backgroundColor: "rgba(49, 49, 51,0.5)",
-  //     padding: 3,
-  //     marginTop: 3,
-  //     borderTopLeftRadius: 5,
-  //     borderBottomLeftRadius: 5,
-  //   },
-  //   rightText: { color: "white" },
-  //   lowerContainer: {
-  //     flex: 1,
-  //     margin: 10,
-  //   },
-  //   titleText: {
-  //     fontWeight: "bold",
-  //     fontSize: 18,
-  //   },
-  //   contentText: {
-  //     marginTop: 10,
-  //     fontSize: 12,
-  //   },
+  // rightTextContainer: {
+  //   marginLeft: 'auto',
+  //   marginRight: -2,
+  //   backgroundColor: 'rgba(49, 49, 51,0.5)',
+  //   padding: 3,
+  //   marginTop: 3,
+  //   borderTopLeftRadius: 5,
+  //   borderBottomLeftRadius: 5,
+  // },
+  // rightText: {color: 'white'},
+  lowerContainer: {
+    flex: 1,
+    margin: 10,
+    flexDirection: 'row',
+    // alignContent: 'space-between',
+  },
+  titleText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    //alignContent: 'flex-start',
+  },
+  contentText: {
+    marginTop: 0,
+    fontSize: 18,
+    alignContent: 'space-between',
+    marginLeft: 70,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });

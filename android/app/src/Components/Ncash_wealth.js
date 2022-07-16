@@ -35,7 +35,12 @@ import LinearGradient from 'react-native-linear-gradient';
 const Ncash_wealth = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const [amount, setAmount] = useState(0);
+  const sal = 118000.115;
+
+  const invest = (sal * 30) / 100;
+  const decimal = Math.round(invest / 1000);
+  const round = decimal * 1000;
+  //const [amount, setAmount] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
   const [sliderValue1, setSliderValue1] = useState(0);
   const [check, setCheck] = useState(false);
@@ -174,9 +179,9 @@ const Ncash_wealth = () => {
           style={{width: 350}}
           minimumTrackTintColor="#307ecc"
           maximumTrackTintColor="#000000"
-          // trackStyle={styles.track}
-          // thumbStyle={styles.thumb}
-          maximumValue={25000}
+          trackStyle={styles.track}
+          thumbStyle={styles.thumb}
+          maximumValue={round}
           minimumValue={check ? 500 : 0}
           step={check ? 100 : 1}
           value={sliderValue1}
@@ -187,11 +192,17 @@ const Ncash_wealth = () => {
             setCheck(true);
             setRen(false);
           }}
+          //thumbTouchSize={1000}
+          //scaleX={1}
+          scaleY={2}
+
+          //translateX={50}
+          //translateY={50}
         />
         <View style={styles.textCon}>
           <Text style={styles.colorGrey}>500</Text>
           {/* <Text style={styles.colorYellow}>{sliderValue.toString()}</Text> */}
-          <Text style={styles.colorGrey}>25000</Text>
+          <Text style={styles.colorGrey}>{round}</Text>
         </View>
       </View>
 
@@ -229,7 +240,7 @@ const Ncash_wealth = () => {
        </View> */}
 
         <ScrollView style={{flexGrow: 0, top: -40}}>
-          <ImageCarousel />
+          <ImageCarousel amount={sliderValue} />
         </ScrollView>
       </View>
       <View style={{top: 50}}>
